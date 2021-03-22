@@ -27,21 +27,23 @@ Things you may want to cover:
 
 ## usersテーブル
 
-| Column                     | Type   | Options     |
-| -------------------------- | ------ | ----------- |
-| nickname                   | string | null: false |
-| email                      | string | unique      |
-| encrypted_password         | string | null: false |
-| first_name                 | string | null: false |
-| last_name                  | string | null: false |
-| first_name_kana            | string | null: false |
-| last_name_kana             | string | null: false |
-| birth_day                  | date   | null: false |
+| Column                     | Type   | Options      |
+| -------------------------- | ------ | ------------ |
+| nickname                   | string | null: false  |
+| email                      | string | unique: true |
+| encrypted_password         | string | null: false  |
+| first_name                 | string | null: false  |
+| last_name                  | string | null: false  |
+| first_name_kana            | string | null: false  |
+| last_name_kana             | string | null: false  |
+| birth_day                  | date   | null: false  |
 
 ### Association
-- has many :items
-- has many :comments
-- has one :buyer 
+- has_many :items
+- has_many :comments
+- has_many :purchases
+- has_one :user_address
+
 
 ## itemsテーブル
 
@@ -52,14 +54,14 @@ Things you may want to cover:
 | category            | string     | null: false |
 | status              | string     | null: false |
 | delivery_payment    | string     | null: false |
-| delivery_from_place | string     | null: false |
+| prefecture_id       | string     | null: false |
 | delivery_day        | string     | null: false |
 | price               | integer    | null: false |
 
 ### Association
 - belongs_to :user
-- has many :comments
-- has one :purchase
+- has_many :comments
+- has_one :purchase
 
 
 ## commentsテーブル
@@ -75,34 +77,30 @@ Things you may want to cover:
 - belongs_to :item
 
 
-## purchasesテーブル
-
-| Column              | Type       | Options     |
-| ------------------- | ---------- | ----------- |
-| item_id             | references | null: false | 
-| price               | references | null: false | 
-| buyer_nickname      | references | null: false |
-| address_id          | integer    | null: false |
-| prefecture_id       | integer    | null: false |
-| city                | string     | null: false |
-| city_text           | string     | null: false |
-| city_building       | string     | null: false |
-| tell                | string     | null: false |
-
-
-### Association
-- belongs_to :buyer
-- belongs_to :item
-
-
-## buyersテーブル
+## user_addressテーブル
 
 | Column              | Type       | Options     |
 | ------------------- | ---------- | ----------- |
 | user_id             | references | null: false |
-| buyer_nickname      | string     | null: false |
-| purchase_id         | references | null: false |
+| address_id          | integer    | null: false |
+| prefecture_id       | integer    | null: false |
+| city                | string     | null: false |
+| city_text           | string     | null: false |
+| city_building       | string     |             |
+| tell                | string     | null: false |
+
 
 ### Association
 - belongs_to :user
-- has many :purchases
+
+
+## purchasesテーブル
+
+| Column              | Type       | Options     |
+| ------------------- | ---------- | ----------- |
+| user_id             | references | null: false |
+| item_id             | references | null: false |
+
+### Association
+- belongs_to :user
+- belongs_to :item
