@@ -42,7 +42,6 @@ Things you may want to cover:
 - has_many :items
 - has_many :comments
 - has_many :purchases
-- has_one :user_address
 
 
 ## itemsテーブル
@@ -52,7 +51,7 @@ Things you may want to cover:
 | user                   | references  | null: false,foreign_key: true |
 | item_name              | string      | null: false                   |
 | item_text              | text        | null: false                   |
-| category               | string      | null: false                   |
+| category_id            | integer     | null: false                   |
 | status_id              | integer     | null: false                   |
 | delivery_payment_id    | integer     | null: false                   |
 | prefecture_id          | integer     | null: false                   |
@@ -80,14 +79,15 @@ Things you may want to cover:
 
 ## user_addressesテーブル
 
-| Column              | Type       | Options     |
-| ------------------- | ---------- | ----------- |
-| address_id          | integer    | null: false |
-| prefecture_id       | integer    | null: false |
-| city                | string     | null: false |
-| city_text           | string     | null: false |
-| city_building       | string     |             |
-| tell                | string     | null: false |
+| Column              | Type       | Options                       |
+| ------------------- | ---------- | ----------------------------- |
+| purchase            | references | null: false,foreign_key: true |
+| address_id          | integer    | null: false                   |
+| prefecture_id       | integer    | null: false                   |
+| city                | string     | null: false                   |
+| city_text           | string     | null: false                   |
+| city_building       | string     |                               |
+| tell                | string     | null: false                   |
 
 
 ### Association
@@ -100,7 +100,6 @@ Things you may want to cover:
 | ------------------- | ---------- | ----------------------------- |
 | user                | references | null: false,foreign_key: true |
 | item                | references | null: false,foreign_key: true |
-| user_address        | references | null: false,foreign_key: true |
 
 ### Association
 - belongs_to :user
