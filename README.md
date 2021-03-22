@@ -27,16 +27,16 @@ Things you may want to cover:
 
 ## usersテーブル
 
-| Column                     | Type   | Options      |
-| -------------------------- | ------ | ------------ |
-| nickname                   | string | null: false  |
-| email                      | string | unique: true |
-| encrypted_password         | string | null: false  |
-| first_name                 | string | null: false  |
-| last_name                  | string | null: false  |
-| first_name_kana            | string | null: false  |
-| last_name_kana             | string | null: false  |
-| birth_day                  | date   | null: false  |
+| Column                     | Type   | Options                  |
+| -------------------------- | ------ | ------------------------ |
+| nickname                   | string | null: false              |
+| email                      | string | null: false,unique: true |
+| encrypted_password         | string | null: false              |
+| first_name                 | string | null: false              |
+| last_name                  | string | null: false              |
+| first_name_kana            | string | null: false              |
+| last_name_kana             | string | null: false              |
+| birth_day                  | date   | null: false              |
 
 ### Association
 - has_many :items
@@ -82,7 +82,7 @@ Things you may want to cover:
 | Column              | Type       | Options                       |
 | ------------------- | ---------- | ----------------------------- |
 | purchase            | references | null: false,foreign_key: true |
-| address_id          | integer    | null: false                   |
+| address             | string     | null: false                   |
 | prefecture_id       | integer    | null: false                   |
 | city                | string     | null: false                   |
 | city_text           | string     | null: false                   |
