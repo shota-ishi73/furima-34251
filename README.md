@@ -47,16 +47,17 @@ Things you may want to cover:
 
 ## itemsテーブル
 
-| Column              | Type       | Options     |
-| ------------------- | ---------- | ----------- |
-| item_name           | string     | null: false |
-| item_text           | text       | null: false |
-| category            | string     | null: false |
-| status              | string     | null: false |
-| delivery_payment    | string     | null: false |
-| prefecture_id       | string     | null: false |
-| delivery_day        | string     | null: false |
-| price               | integer    | null: false |
+| Column                 | Type        | Options                       |
+| ---------------------- | ----------- | ----------------------------- |
+| user                   | references  | null: false,foreign_key: true |
+| item_name              | string      | null: false                   |
+| item_text              | text        | null: false                   |
+| category               | string      | null: false                   |
+| status_id              | integer     | null: false                   |
+| delivery_payment_id    | integer     | null: false                   |
+| prefecture_id          | integer     | null: false                   |
+| delivery_day_id        | integer     | null: false                   |
+| price                  | integer     | null: false                   |
 
 ### Association
 - belongs_to :user
@@ -77,11 +78,10 @@ Things you may want to cover:
 - belongs_to :item
 
 
-## user_addressテーブル
+## user_addressesテーブル
 
 | Column              | Type       | Options     |
 | ------------------- | ---------- | ----------- |
-| user_id             | references | null: false |
 | address_id          | integer    | null: false |
 | prefecture_id       | integer    | null: false |
 | city                | string     | null: false |
@@ -91,16 +91,18 @@ Things you may want to cover:
 
 
 ### Association
-- belongs_to :user
+- belongs_to :purchase
 
 
 ## purchasesテーブル
 
-| Column              | Type       | Options     |
-| ------------------- | ---------- | ----------- |
-| user_id             | references | null: false |
-| item_id             | references | null: false |
+| Column              | Type       | Options                       |
+| ------------------- | ---------- | ----------------------------- |
+| user                | references | null: false,foreign_key: true |
+| item                | references | null: false,foreign_key: true |
+| user_address        | references | null: false,foreign_key: true |
 
 ### Association
 - belongs_to :user
 - belongs_to :item
+- has_one :user_address
