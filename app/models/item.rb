@@ -12,9 +12,11 @@ class Item < ApplicationRecord
       validates :prefecture_id
       validates :delivery_day_id
     end
-    validates :price, inclusion: { in: 300..9_999_999 }
+    validates :price, inclusion: { in: 300..9_999_999 }, numericality: true
     validates :image
   end
+
+  
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
