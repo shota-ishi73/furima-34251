@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Item, type: :model do
   before do
     @item = FactoryBot.build(:item)
-    @item.image = fixture_file_upload('app/assets/images/test.png')
   end
 
   describe '商品出品機能' do
@@ -24,35 +23,30 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Item text can't be blank")
       end
-      it 'category_idが空では登録できない' do
-        @item.category_id = ''
+      it "category_idが'---'では登録できない" do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
-      it 'status_idが空では登録できない' do
-        @item.status_id = ''
+      it "status_idが'---'では登録できない" do
+        @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
-      it 'status_idが空では登録できない' do
-        @item.status_id = ''
+      it "delivery_payment_idが'---'では登録できない" do
+        @item.delivery_payment_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery payment must be other than 1")
       end
-      it 'delivery_payment_idが空では登録できない' do
-        @item.delivery_payment_id = ''
+      it "prefecture_idが'---'では登録できない" do
+        @item.prefecture_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery payment can't be blank")
+        expect(@item.errors.full_messages).to include("Prefecture must be other than 1")
       end
-      it 'prefecture_idが空では登録できない' do
-        @item.prefecture_id = ''
+      it "delivery_day_idが'---'では登録できない" do
+        @item.delivery_day_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Prefecture can't be blank")
-      end
-      it 'delivery_day_idが空では登録できない' do
-        @item.delivery_day_id = ''
-        @item.valid?
-        expect(@item.errors.full_messages).to include("Delivery day can't be blank")
+        expect(@item.errors.full_messages).to include("Delivery day must be other than 1")
       end
       it 'priceが空では登録できない' do
         @item.price = ''
@@ -66,6 +60,11 @@ RSpec.describe Item, type: :model do
       end
       it 'priceが10000000円以上では登録できない' do
         @item.price = '10000000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは半角数字でなければ登録できない' do
+        @item.price = '９９９９'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
