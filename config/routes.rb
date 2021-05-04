@@ -4,8 +4,7 @@ Rails.application.routes.draw do
   get 'items/index'
   root to: 'items#index'
 
-  resources :items, only: [:index, :new, :create, :show, :edit, :update] do
-  end
+  resources :items
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
