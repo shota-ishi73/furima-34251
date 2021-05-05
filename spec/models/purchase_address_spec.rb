@@ -74,7 +74,24 @@ RSpec.describe User, type: :model do
           @purchase_address.valid?
           expect(@purchase_address.errors.full_messages).to include("Tell is too long (maximum is 11 characters)")
         end
-      end
 
+        it "電話番号が英数混合の場合" do
+          @purchase_address.tell = "o9o123456789"
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Tell is not a number")
+        end
+
+        it "user_idが空の場合" do
+          @purchase_address.user_id = ""
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+        end
+
+        it "item_idが空の場合" do
+          @purchase_address.item_id = ""
+          @purchase_address.valid?
+          expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
+        end
+      end
     end
   end

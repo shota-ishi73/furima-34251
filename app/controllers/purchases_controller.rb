@@ -1,8 +1,8 @@
 class PurchasesController < ApplicationController
 
   before_action :authenticate_user!
-  before_action :redirect
   before_action :item_find, only: [:index, :create]
+  before_action :redirect
 
   def index
     @purchase_address = PurchaseAddress.new
@@ -39,7 +39,6 @@ class PurchasesController < ApplicationController
   end
 
   def redirect
-    @item = Item.find(params[:item_id])
     if @item.user_id == current_user.id
       redirect_to root_path
     end
