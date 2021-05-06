@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :redirect, only: [:edit, :update, :destroy]
-  before_action :redirect2, only: [:edit, :update, :destroy]
 
 
   def index
@@ -53,11 +52,7 @@ end
   end
 
   def redirect
-    redirect_to root_path unless current_user.id == @item.user_id
-  end
-
-  def redirect2
-    if @item.purchase.present?
+    if @item.purchase.present? or current_user.id != @item.user_id
       redirect_to root_path
     end
   end
