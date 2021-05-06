@@ -77,7 +77,7 @@ Things you may want to cover:
 - belongs_to :item
 
 
-## user_addressesテーブル
+## addressesテーブル
 
 | Column              | Type       | Options                       |
 | ------------------- | ---------- | ----------------------------- |
@@ -104,4 +104,4 @@ Things you may want to cover:
 ### Association
 - belongs_to :user
 - belongs_to :item
-- has_one :user_address
+- has_one :address
